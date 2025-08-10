@@ -9,6 +9,7 @@ type CategoryRepository interface {
 	Create(category *models.Category) error
 	GetAll() ([]models.Category, error)
 	GetByID(id uint) (*models.Category, error)
+	Update(category *models.Category) error
 }
 
 type categoryRepository struct {
@@ -35,4 +36,9 @@ func (cr *categoryRepository) GetByID(id uint) (*models.Category, error) {
 	err := cr.db.First(&category, id).Error
 
 	return &category, err
+}
+
+func (cr *categoryRepository) Update(category *models.Category) error {
+	return cr.db.Save(category).Error
+
 }

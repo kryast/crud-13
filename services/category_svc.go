@@ -9,6 +9,7 @@ type CategoryService interface {
 	Create(category *models.Category) error
 	GetAll() ([]models.Category, error)
 	GetByID(id uint) (*models.Category, error)
+	Update(category *models.Category) error
 }
 
 type categoryService struct {
@@ -29,4 +30,8 @@ func (cs *categoryService) GetAll() ([]models.Category, error) {
 
 func (cs *categoryService) GetByID(id uint) (*models.Category, error) {
 	return cs.repo.GetByID(id)
+}
+
+func (cs *categoryService) Update(category *models.Category) error {
+	return cs.repo.Update(category)
 }

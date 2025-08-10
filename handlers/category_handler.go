@@ -53,3 +53,21 @@ func (ch *CategoryHandler) GetByID(c *gin.Context) {
 
 	c.JSON(http.StatusOK, category)
 }
+
+func (ch *CategoryHandler) Update(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	var category models.Category
+	if err := c.ShouldBindJSON(&category); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"Error": err})
+		return
+	}
+
+	category.ID = uint(id)
+
+	if err := ch.service.Update(&category); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": err})
+		return
+	}
+
+	c.JSON(http.StatusOK, category)
+}
