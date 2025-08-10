@@ -10,6 +10,7 @@ type CategoryService interface {
 	GetAll() ([]models.Category, error)
 	GetByID(id uint) (*models.Category, error)
 	Update(category *models.Category) error
+	Delete(id uint) error
 }
 
 type categoryService struct {
@@ -34,4 +35,8 @@ func (cs *categoryService) GetByID(id uint) (*models.Category, error) {
 
 func (cs *categoryService) Update(category *models.Category) error {
 	return cs.repo.Update(category)
+}
+
+func (cs *categoryService) Delete(id uint) error {
+	return cs.repo.Delete(id)
 }

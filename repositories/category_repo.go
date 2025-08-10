@@ -10,6 +10,7 @@ type CategoryRepository interface {
 	GetAll() ([]models.Category, error)
 	GetByID(id uint) (*models.Category, error)
 	Update(category *models.Category) error
+	Delete(id uint) error
 }
 
 type categoryRepository struct {
@@ -41,4 +42,8 @@ func (cr *categoryRepository) GetByID(id uint) (*models.Category, error) {
 func (cr *categoryRepository) Update(category *models.Category) error {
 	return cr.db.Save(category).Error
 
+}
+
+func (cr *categoryRepository) Delete(id uint) error {
+	return cr.db.Delete(&models.Category{}, id).Error
 }

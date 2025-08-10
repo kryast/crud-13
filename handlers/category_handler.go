@@ -71,3 +71,14 @@ func (ch *CategoryHandler) Update(c *gin.Context) {
 
 	c.JSON(http.StatusOK, category)
 }
+
+func (ch *CategoryHandler) Delete(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+
+	if err := ch.service.Delete(uint(id)); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": err})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "category deleted"})
+}

@@ -19,6 +19,7 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 	r.GET("/category", h.GetAll)
 	r.GET("/category/:id", h.GetByID)
 	r.PUT("/category/:id", h.Update)
+	r.DELETE("/category/:id", h.Delete)
 
 	return r
 }

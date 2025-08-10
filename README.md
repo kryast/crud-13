@@ -13,3 +13,6 @@ PUT
 curl -X PUT http://localhost:8080/category/1 \
 -H "Content-Type: application/json" \
 -d '{"name": "Updated Electronics"}'
+
+DELETE
+curl -X DELETE http://localhost:8080/category/1
