@@ -7,3 +7,4 @@ curl -X POST http://localhost:8080/category \
 
 GET
 curl -X GET http://localhost:8080/category
+curl -X GET http://localhost:8080/category/1

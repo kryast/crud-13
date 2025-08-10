@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/kryast/crud-13.git/models"
@@ -33,6 +34,18 @@ func (ch *CategoryHandler) Create(c *gin.Context) {
 
 func (ch *CategoryHandler) GetAll(c *gin.Context) {
 	category, err := ch.service.GetAll()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"Error": err})
+		return
+	}
+
+	c.JSON(http.StatusOK, category)
+}
+
+func (ch *CategoryHandler) GetByID(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+
+	category, err := ch.service.GetByID(uint(id))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"Error": err})
 		return

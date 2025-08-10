@@ -16,6 +16,8 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 	h := handlers.NewCategoryHandler(svc)
 
 	r.POST("/category", h.Create)
+	r.GET("/category", h.GetAll)
+	r.GET("/category/:id", h.GetByID)
 
 	return r
 }
