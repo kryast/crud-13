@@ -7,6 +7,7 @@ import (
 
 type CategoryService interface {
 	Create(category *models.Category) error
+	GetAll() ([]models.Category, error)
 }
 
 type categoryService struct {
@@ -19,4 +20,8 @@ func NewCategoryService(repo repositories.CategoryRepository) CategoryService {
 
 func (cs *categoryService) Create(category *models.Category) error {
 	return cs.repo.Create(category)
+}
+
+func (cs *categoryService) GetAll() ([]models.Category, error) {
+	return cs.repo.GetAll()
 }

@@ -7,6 +7,7 @@ import (
 
 type CategoryRepository interface {
 	Create(category *models.Category) error
+	GetAll() ([]models.Category, error)
 }
 
 type categoryRepository struct {
@@ -19,4 +20,11 @@ func NewCategoryRepository(db *gorm.DB) CategoryRepository {
 
 func (cr *categoryRepository) Create(category *models.Category) error {
 	return cr.db.Create(category).Error
+}
+
+func (cr *categoryRepository) GetAll() ([]models.Category, error) {
+	var category []models.Category
+	err := cr.db.Find(&category).Error
+
+	return category, err
 }

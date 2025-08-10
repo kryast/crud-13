@@ -30,3 +30,13 @@ func (ch *CategoryHandler) Create(c *gin.Context) {
 
 	c.JSON(http.StatusOK, category)
 }
+
+func (ch *CategoryHandler) GetAll(c *gin.Context) {
+	category, err := ch.service.GetAll()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"Error": err})
+		return
+	}
+
+	c.JSON(http.StatusOK, category)
+}
