@@ -1,8 +1,12 @@
 package repositories
 
-import "gorm.io/gorm"
+import (
+	"github.com/kryast/crud-13.git/models"
+	"gorm.io/gorm"
+)
 
 type CategoryRepository interface {
+	Create(category *models.Category) error
 }
 
 type categoryRepository struct {
@@ -11,4 +15,8 @@ type categoryRepository struct {
 
 func NewCategoryRepository(db *gorm.DB) CategoryRepository {
 	return &categoryRepository{db}
+}
+
+func (cr *categoryRepository) Create(category *models.Category) error {
+	return cr.db.Create(category).Error
 }
